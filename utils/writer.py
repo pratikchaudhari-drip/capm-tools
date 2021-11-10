@@ -3,7 +3,7 @@ from utils.formatting import datetime_to_str
 def write_file(
     df
     , filetype
-    , filepath = '.\\__data__\\tapes\\tape_drip-{}.{}'
+    , filepath = '.\\tapes\\tape_drip-{}.{}'
     ):
 
     filepath = filepath.format(datetime_to_str(), filetype)
