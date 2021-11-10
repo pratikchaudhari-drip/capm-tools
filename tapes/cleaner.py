@@ -154,7 +154,6 @@ date_cols = ['new_due_date'
 
 def clean_tape_query(df):
 
-    df = df[df['advanced_value_usd'] > 0]
     df['full_payment_date'].fillna(0, inplace=True)
     df['latest_due_date'] = df[['new_due_date', 'due_date']].max(axis=1)
     df['days_to_repay'] = df.apply(get_days_to_repay, axis=1)
@@ -165,4 +164,10 @@ def clean_tape_query(df):
     df['currency'][df['currency'] == 'EURO'] = df['currency'][df['currency'] == 'EURO'].str.replace('EURO', 'EUR')
     df['currency'][df['currency'] == 'POUND'] = df['currency'][df['currency'] == 'POUND'].str.replace('POUND', 'GBP')
         
+    return df
+
+def filter(df):
+
+    df = df[df['advanced_value_usd'] > 0]
+
     return df
