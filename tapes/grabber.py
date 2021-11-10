@@ -14,15 +14,22 @@ def read_tape(cutoff_date):
     return df
 
 
-def query_tape(type = 'sf'):
+def query_tape(type = None):
     if (type == 'sf'):
-        tape_query = open('.\\tapes\\sql\\data_tape.sql', 'r').read()
+        tape_query = open('.\\tapes\\sql\\sf_data_tape.sql', 'r').read()
         df = db.get_data(tape_query)
-        return df
-    else:
+
+    elif (type == 'scf'):
         tape_query = open('.\\tapes\\sql\\scf_data_tape.sql', 'r').read()
         df = db.get_data(tape_query)
-        return df
+
+    elif (type == None):
+        tape_query = open('.\\tapes\\sql\\data_tape.sql', 'r').read()
+        df = db.get_data(tape_query)
+
+    df = cleaner.clean_tape_query(df)
+
+    return df
 
 
 def read_alm(cutoff_date):
